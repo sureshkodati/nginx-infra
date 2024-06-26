@@ -1,0 +1,13 @@
+project_id="dev-project-426703"
+my_region="us-central1"
+my_zone="us-central1-a"
+bucket_name="backend-dev-project-426703"
+backend_region="us-central1"
+my_vpc="lin-vpc"
+my_subnet="lin-subnet"
+cidr_range="10.4.0.0/16"
+env="dev"
+vm_name="nginx-vm"
+machine_type="e2-standard-2"
+allowed_ports=["80", "443", "8080", "22"]
+linux_server_image="debian-cloud/debian-11"
