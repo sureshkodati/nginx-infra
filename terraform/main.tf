@@ -26,7 +26,7 @@ resource "google_compute_instance" "nginx_server" {
   # Script to install IIS (replace with actual commands)
   echo "Testing"
   # Update package lists
-  sudo apt update -y
+  sudo apt update
 
   # Install Nginx
   sudo apt install -y nginx
