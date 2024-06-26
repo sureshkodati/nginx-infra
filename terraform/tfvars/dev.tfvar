@@ -11,3 +11,4 @@ vm_name="nginx-vm"
 machine_type="e2-standard-2"
 allowed_ports=["80", "443", "8080", "22"]
 linux_server_image="debian-cloud/debian-11"
+service_account_roles =  [ "roles/compute.imageUser", "roles/compute.networkUser", "roles/compute.instanceAdmin", "roles/storage.admin", ]
