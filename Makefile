@@ -2,6 +2,7 @@
 .DEFAULT_GOAL := help
 
 VAR_FILE := "./tfvars/dev.tfvar"
+VAR_FILE2 := "test"
 VAR_STATE_PATH := "nginix-infra"
 VAR_ENV := "dev"
 DEPLOY := destroy
@@ -21,7 +22,7 @@ deploy:
 ifeq  ($(DEPLOY), deploy)
 	make apply
 else ifeq ($(DEPLOY), destroy)
-	make deploy VAR_FILE=$(VAR_FILE)
+	make deploy VAR_FILE2=$(VAR_FILE)
 endif
 
 apply:
@@ -31,7 +32,7 @@ apply:
 
 destroy:
 	cd terraform  && \
-	terraform destroy -var-file=$(VAR_FILE) -auto-approve
+	terraform destroy -var-file=$(VAR_FILE2) -auto-approve
 
 clean:
 	cd terraform  && \
