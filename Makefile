@@ -2,14 +2,14 @@
 .DEFAULT_GOAL := help
 
 VAR_FILE := "./tfvars/dev.tfvar"
-VRA_STATE_PATH := "nginix-infra"
+VAR_STATE_PATH := "nginix-infra"
 VAR_ENV := "dev"
 DEPLOY := detroy
 
 init:
 	make clean
 	cd terraform && \
-	terraform init -backend-config "prefix=terraform/${VRA_STATE_PATH}/state-${VAR_ENV}" -migrate-state &&  \
+	terraform init -backend-config "prefix=terraform/${VAR_STATE_PATH}/state-${VAR_ENV}" -migrate-state &&  \
 	terraform validate && \
 	terraform fmt
 
@@ -21,7 +21,7 @@ deploy:
 ifeq  ($(DEPLOY), deploy)
 	make apply
 else ifeq ($(DEPLOY), destroy)
-	make destroy
+	make destroy -var-file=$(VAR_FILE)
 endif
 
 apply:

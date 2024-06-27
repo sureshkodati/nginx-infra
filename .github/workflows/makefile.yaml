@@ -1,0 +1,40 @@
+name: Makefile CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  Infra:
+
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v0.8.1'
+      with:
+        token_format: 'access_token'
+        workload_identity_provider: 'projects/686969711663/locations/global/workloadIdentityPools/github-pool/providers/github'
+        service_account: 'githubconnection@dev-project-426703.iam.gserviceaccount.com'
+
+    - name: Downloading Var File
+      run: |
+        gcloud alpha storage cp gs://backend-dev-project-426703/tfvars/nginx-infra/dev.tfvar dev.tfvar
+
+    - name: Initialising Terraform
+      run: make init VAR_ENV="dev" VAR_STATE_PATH="nginix-infra"
+
+    - name: Creating Terraform Plan
+      run: make plan VAR_FILE="../dev.tfvar" 
+
+    - name: Deploying Terraform
+      run: make deploy VAR_FILE="../dev.tfvar" 
