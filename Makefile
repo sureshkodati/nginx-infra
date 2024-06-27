@@ -1,10 +1,14 @@
 .PHONY: help init plan apply deploy destroy
 .DEFAULT_GOAL := help
 
-VAR_FILE := "./tfvars/dev.tfvar"
-VAR_STATE_PATH := "nginix-infra"
-VAR_ENV := "dev"
-DEPLOY := destroy
+#VAR_FILE := "./tfvars/dev.tfvar"
+VAR_FILE := "test"
+#VAR_STATE_PATH := "nginix-infra"
+VAR_STATE_PATH := "test"
+#VAR_ENV := "dev"
+VAR_ENV := "test"
+DEPLOY := deploy
+#DEPLOY := destroy
 
 init:
 	make clean
