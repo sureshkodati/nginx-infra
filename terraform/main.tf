@@ -3,7 +3,7 @@ resource "google_compute_instance" "nginx_server" {
   name         = var.vm_name
   machine_type = var.machine_type # Adjust as needed
   service_account {
-    email = google_service_account.nginx_sa.email
+    email  = google_service_account.nginx_sa.email
     scopes = ["cloud-platform"]
   }
   boot_disk {
@@ -22,35 +22,7 @@ resource "google_compute_instance" "nginx_server" {
   }
 
   # Add startup script to configure IIS (replace with actual script)
-  metadata_startup_script = <<EOF
-  # Script to install IIS (replace with actual commands)
-  echo "Testing"
-  # Update package lists
-  sudo apt update
-
-  # Install Nginx
-  sudo apt install -y nginx
-
-  gsutil cp gs://backend-dev-project-426703/sites.tar
-  gsutil cp gs://backend-dev-project-426703/default
-
-  sudo mkdir  /var/www/html/site
-  tar -xvf sites.tar 
-  sudo touch /var/www/html/index.html
-  cat << EOT >> "/var/www/html/index.html"
-  <h1> Sites </h1>
-  <h2> Infosys </h2>
-  <h2> Wellsfargo </h2>
-  <h2> Microsoft </h2>
-EOT
-  sudo cp Sites/* /var/www/html/site -r
-  sudo chown -R www-data:www-data /var/www/html/site
-  sudo rm /etc/nginx/sites-available/default
-  sudo cp default /etc/nginx/sites-available/default
-
-  sudo systemctl restart nginx
-  # ...
-  EOF
+  metadata_startup_script = file("startup_script.sh")
 }
 
 #Output the VM's external IP address (if assigned)

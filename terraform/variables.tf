@@ -64,8 +64,8 @@ variable "linux_server_image" {
 }
 
 variable "service_account_roles" {
-  type = set(string)
-  default = [ "roles/compute.imageUser", "roles/compute.networkUser", ]
+  type        = set(string)
+  default     = ["roles/compute.imageUser", "roles/compute.networkUser", ]
   description = "Sercive Acount Roles"
 }
 

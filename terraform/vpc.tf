@@ -30,8 +30,8 @@ resource "google_compute_firewall" "egress_rule" {
   network = google_compute_network.vpc_network.self_link
 
   allow {
-      ports    = []
-      protocol = "all"
+    ports    = []
+    protocol = "all"
   }
   source_ranges = ["0.0.0.0/0"] # Allow SSH from anywhere (adjust for security)
 }
