@@ -21,7 +21,7 @@ deploy:
 ifeq  ($(DEPLOY), deploy)
 	make apply
 else ifeq ($(DEPLOY), destroy)
-	make destroy -var-file=$(VAR_FILE)
+	make deploy VAR_FILE=$(VAR_FILE)
 endif
 
 apply:
