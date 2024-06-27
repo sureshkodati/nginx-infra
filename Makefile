@@ -4,7 +4,7 @@
 VAR_FILE := "./tfvars/dev.tfvar"
 VAR_STATE_PATH := "nginix-infra"
 VAR_ENV := "dev"
-DEPLOY := detroy
+DEPLOY := destroy
 
 init:
 	make clean
