@@ -7,8 +7,8 @@ VAR_FILE := "test"
 VAR_STATE_PATH := "test"
 #VAR_ENV := "dev"
 VAR_ENV := "test"
-DEPLOY := deploy
-#DEPLOY := destroy
+#DEPLOY := deploy
+DEPLOY := destroy
 
 init:
 	make clean
